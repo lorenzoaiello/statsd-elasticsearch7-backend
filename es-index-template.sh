@@ -15,19 +15,7 @@ curl -XPUT "${ES_HOST:-localhost}:${ES_PORT:-9200}/_template/statsd-template" -d
                     "type": "double",
                     "index": "not_analyzed"
                 },
-                "ns": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                },
-                "grp": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                },
-                "tgt": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                },
-                "act": {
+                "name": {
                     "type": "string",
                     "index": "not_analyzed"
                 }
@@ -43,19 +31,7 @@ curl -XPUT "${ES_HOST:-localhost}:${ES_PORT:-9200}/_template/statsd-template" -d
                     "type": "double",
                     "index": "not_analyzed"
                 },
-                "ns": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                },
-                "grp": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                },
-                "tgt": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                },
-                "act": {
+                "name": {
                     "type": "string",
                     "index": "not_analyzed"
                 }
@@ -71,19 +47,7 @@ curl -XPUT "${ES_HOST:-localhost}:${ES_PORT:-9200}/_template/statsd-template" -d
                     "type": "double",
                     "index": "not_analyzed"
                 },
-                "ns": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                },
-                "grp": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                },
-                "tgt": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                },
-                "act": {
+                "name": {
                     "type": "string",
                     "index": "not_analyzed"
                 }
@@ -163,19 +127,7 @@ curl -XPUT "${ES_HOST:-localhost}:${ES_PORT:-9200}/_template/statsd-template" -d
                     "type": "integer",
                     "index": "not_analyzed"
                 },
-                "ns": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                },
-                "grp": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                },
-                "tgt": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                },
-                "act": {
+                "name": {
                     "type": "string",
                     "index": "not_analyzed"
                 }
