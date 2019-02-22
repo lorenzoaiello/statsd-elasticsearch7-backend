@@ -1,135 +1,86 @@
-curl -XPUT "${ES_HOST:-localhost}:${ES_PORT:-9200}/_template/statsd-template" -d '
+curl -XPUT -H 'Content-Type: application/json' "${ES_HOST:-localhost}:${ES_PORT:-9200}/_template/statsd-template" -d '
 {
     "template" : "statsd-*",
     "settings" : {
         "number_of_shards" : 1
     },
     "mappings" : {
-        "counter" : {
+        "stats" : {
             "_source" : { "enabled" : true },
             "properties": {
+                "type": {
+                    "type": "keyword"
+                },
                 "@timestamp": {
                     "type": "date"
                 },
                 "val": {
                     "type": "double",
-                    "index": "not_analyzed"
+                    "index": "true"
                 },
                 "name": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                }
-            }
-        },
-        "gauge" : {
-            "_source" : { "enabled" : true },
-            "properties": {
-                "@timestamp": {
-                    "type": "date"
-                },
-                "val": {
-                    "type": "double",
-                    "index": "not_analyzed"
-                },
-                "name": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                }
-            }
-        },
-        "timer" : {
-            "_source" : { "enabled" : true },
-            "properties": {
-                "@timestamp": {
-                    "type": "date"
-                },
-                "val": {
-                    "type": "double",
-                    "index": "not_analyzed"
-                },
-                "name": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                }
-            }
-        },
-        "timer_data" : {
-            "_source" : { "enabled" : true },
-            "properties": {
-                "@timestamp": {
-                    "type": "date"
+                    "type": "keyword",
+                    "index": "true"
                 },
                 "count_ps": {
                     "type": "float",
-                    "index": "not_analyzed"
+                    "index": "true"
                 },
                 "count": {
                     "type": "float",
-                    "index": "not_analyzed"
+                    "index": "true"
                 },
                 "upper": {
                     "type": "float",
-                    "index": "not_analyzed"
+                    "index": "true"
                 },
                 "lower": {
                     "type": "float",
-                    "index": "not_analyzed"
+                    "index": "true"
                 },
                 "mean": {
                     "type": "float",
-                    "index": "not_analyzed"
+                    "index": "true"
                 },
                 "median": {
                     "type": "float",
-                    "index": "not_analyzed"
-                },
-                "mean": {
-                    "type": "float",
-                    "index": "not_analyzed"
-                },
-                "upper": {
-                    "type": "float",
-                    "index": "not_analyzed"
+                    "index": "true"
                 },
                 "std": {
                     "type": "float",
-                    "index": "not_analyzed"
+                    "index": "true"
                 },
                  "sum": {
                     "type": "float",
-                    "index": "not_analyzed"
+                    "index": "true"
                 },
                 "mean_90": {
                     "type": "float",
-                    "index": "not_analyzed"
+                    "index": "true"
                 },
                 "upper_90": {
                     "type": "float",
-                    "index": "not_analyzed"
+                    "index": "true"
                 },
                 "sum_90": {
                     "type": "float",
-                    "index": "not_analyzed"
+                    "index": "true"
                 },
                 "bin_100": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "index": "true"
                 },
                 "bin_500": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "index": "true"
                 },
                 "bin_1000": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "index": "true"
                 },
                 "bin_inf": {
                     "type": "integer",
-                    "index": "not_analyzed"
-                },
-                "name": {
-                    "type": "string",
-                    "index": "not_analyzed"
+                    "index": "true"
                 }
             }
         }
