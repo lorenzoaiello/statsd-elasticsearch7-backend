@@ -3,11 +3,17 @@
   "contributors": [
     {
       "name": "Mark Kimsal"
+    },
+    {
+      "name": "Brad Seefeld"
+    },
+    {
+      "name": "Jason Zhu"
     }
   ],
   "name": "statsd-elasticsearch-backend",
   "description": "A StatsD backend for Elasticsearch",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "homepage": "https://github.com/markkimsal/statsd-elasticsearch-backend",
   "repository": {
     "type": "git",
