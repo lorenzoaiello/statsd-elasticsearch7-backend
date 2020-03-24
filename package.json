@@ -1,5 +1,5 @@
 {
-  "author": "Ramesh Perumalsamy",
+  "author": "Lorenzo Aiello",
   "contributors": [
     {
       "name": "Mark Kimsal"
@@ -9,15 +9,18 @@
     },
     {
       "name": "Jason Zhu"
+    },
+    {
+      "name": "Ramesh Perumalsamy"
     }
   ],
   "name": "statsd-elasticsearch-backend",
-  "description": "A StatsD backend for Elasticsearch",
-  "version": "0.5.0",
-  "homepage": "https://github.com/markkimsal/statsd-elasticsearch-backend",
+  "description": "A StatsD backend for Elasticsearch 7.x",
+  "version": "0.5.1",
+  "homepage": "https://github.com/lorenzoaiello/statsd-elasticsearch-backend",
   "repository": {
     "type": "git",
-    "url": "git://github.com/markkkimsal/statsd-elasticsearch-backend.git"
+    "url": "git://github.com/lorenzoaiello/statsd-elasticsearch-backend.git"
   },
   "keywords": [
     "elasticsearch",
