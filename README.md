@@ -1,27 +1,23 @@
 statsd-elasticsearch-backend
 ============================
 
-Elasticsearch backend for statsd
+Elasticsearch 7.x backend for statsd
 
 ## Overview
 
-This backend allows [Statsd][statsd] to save to [Elasticsearch][elasticsearch].  Supports dynamic index creation per day and follows the logstash naming convention of statsd-YYYY.MM.DD for index creation.
-
-## History 
-
-Originally written by Github user rameshpy, this library was created as a feature branch of etsy/statsd.  The statsd project recommended that this library be converted to its own repository as all other backends currently do.  This repository started as a restructuring of the existing feature branch into a standalone backend repository.
+This backend allows statsd to save to Elasticsearch.  Supports dynamic index creation per day and follows the logstash naming convention of statsd-YYYY.MM.DD for index creation.
 
 ## Installation
 
     $ cd /path/to/statsd
-    $ npm install git://github.com/markkimsal/statsd-elasticsearch-backend.git
+    $ npm install git://github.com/lorenzoaiello/statsd-elasticsearch-backend.git
     
 To install from behind a proxy server:
 
     $ export https_proxy=http://your.proxyserver.org:8080
     $ export http_proxy=http://your.proxyserver.org:8080
     $ cd /path/to/statsd
-    $ npm install git+https://github.com/markkimsal/statsd-elasticsearch-backend.git
+    $ npm install git+https://github.com/lorenzoaiello/statsd-elasticsearch-backend.git
 
 
 ## Configuration
@@ -31,7 +27,7 @@ Add a structure to your configuration called "elasticsearch"
 
 ```js
 
- backends: [ 'statsd-elasticsearch-backend', 'other-backends'],
+ backends: [ 'statsd-elasticsearch-backend' ],
  debug: true,
  elasticsearch: {
 	 port:          9200,
@@ -69,23 +65,15 @@ The field _indexTimestamp_ allows you to determine the timestamping for your dyn
 
 The type configuration options allow you to specify different elasticsearch \_types for each statsd measurement.
 
-## Important upgrade from 0.2 to 0.3
-
-Previously, the config value for timerDataType was always ignored and timer data was alwasy saved as the timerType + '\_stats'.  If you are upgrading a live instance from 0.2 please be aware that the value of timerDataType will now be respected and you should ensure that you have the proper type mappings (especially for @timestamp) or that your timerDataType is set to timerType + '\_stats'.
-
-In addition to the above, the value of timerDataType was always overwriting timerData, so all timer information was being saved to the type "timer\_data" when the sample configuration would lead you to believe that it was being saved to the type "timer".
-
-In summary, the ES \_types of "timer_data" and "timer_data_stats" will now be "timer" and "timer_data" if the sample configuration is used.
-
 ## Template Mapping (basically required)
 
 To configure Elasticsearch to automatically apply index template settings based on a naming pattern look at the es-index-template.sh file.  It will probably need customization (the timer_data type) for your particular statsd configuration (re: threshold pct and bins).
 
 From your etc/statsd installation type the following to get the basic template mapping
 ```
-sh  node_modules/statsd-elasticsearch-backend/es-index-template.sh
+sh  node_modules/statsd-elasticsearch-backend/scripts/es-index-template.sh
 # if your ES is on another machine or port
-ES_HOST=10.1.10.200 ES_PORT=9201 sh node_modules/statsd-elasticsearch-backend/es-index-template.sh
+ES_HOST=10.1.10.200 ES_PORT=9201 sh node_modules/scripts/statsd-elasticsearch-backend/es-index-template.sh
 ```
 Without this, your timestamps will not be interpreted as timestamps.
 
@@ -122,19 +110,20 @@ The above would be mapped into a JSON document like this:
 }
 ```
 
-Currently the keys are hardcoded to: namespace, group, target, and action, as in the above example.  Having configurable naming conventions is the goal of a 1.0 release.
-The idea for mapping came mostly from: [http://matt.aimonetti.net/posts/2013/06/26/practical-guide-to-graphite-monitoring/]
+Currently the keys are hardcoded to: namespace, group, target, and action, as in the above example. 
 
 ## Configurable Metric Formatters
 
-As of 0.4.0 you can now choose to use from a selection of metric key formatters or write your own.
+You can choose to use from a selection of metric key formatters or write your own.
 
 The config value _formatter_ will resolve to the name of a file under lib/ with a .js extension added to it.
 
-````
+```
 formatter:  my_own_format  # this will require ('lib/' + 'my_own_format' + '.js);
 ```
+
 In this module you will need to export a number of functions.  The 4 that are supported right now are:
+
 ```
 counters( key, value, ts, array )
 timers( key, value, ts, array )
@@ -142,14 +131,14 @@ timer_data( key, value, ts, array )
 gauges( key, value, ts, array )
 ```
 
-Look at lib/default\_format.js for a template to build your own.
+Look at `lib/default_format.js` for a template to build your own.
 
 ## Basic Auth
 
 In order to use basic auth in your application, add two keys to configuration of application:
 
 ```js
- backends: [ 'statsd-elasticsearch-backend', 'other-backends'],
+ backends: [ 'statsd-elasticsearch-backend' ],
  debug: true,
  elasticsearch: {
     ...
