@@ -1,4 +1,4 @@
-statsd-elasticsearch-backend
+statsd-elasticsearch7-backend
 ============================
 
 Elasticsearch 7.x backend for statsd
@@ -27,7 +27,7 @@ Add a structure to your configuration called "elasticsearch":
 
 ```js
 
- backends: [ 'statsd-elasticsearch-backend' ],
+ backends: [ 'statsd-elasticsearch7-backend' ],
  debug: true,
  elasticsearch: {
 	 port:          9200,
@@ -141,7 +141,7 @@ Look at `lib/default_format.js` for a template to build your own.
 In order to use basic auth in your application, add two keys to configuration of application:
 
 ```js
- backends: [ 'statsd-elasticsearch-backend' ],
+ backends: [ 'statsd-elasticsearch7-backend' ],
  debug: true,
  elasticsearch: {
     ...
