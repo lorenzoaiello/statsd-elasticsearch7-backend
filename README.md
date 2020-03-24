@@ -10,20 +10,20 @@ This backend allows statsd to save to Elasticsearch.  Supports dynamic index cre
 ## Installation
 
     $ cd /path/to/statsd
-    $ npm install git://github.com/lorenzoaiello/statsd-elasticsearch-backend.git
+    $ npm install statsd-elasticsearch7-backend
     
 To install from behind a proxy server:
 
     $ export https_proxy=http://your.proxyserver.org:8080
     $ export http_proxy=http://your.proxyserver.org:8080
     $ cd /path/to/statsd
-    $ npm install git+https://github.com/lorenzoaiello/statsd-elasticsearch-backend.git
+    $ npm install statsd-elasticsearch7-backend
 
 
 ## Configuration
 
 Merge the following configuration into your top-level existing configuration.
-Add a structure to your configuration called "elasticsearch"
+Add a structure to your configuration called "elasticsearch":
 
 ```js
 
@@ -47,12 +47,15 @@ Add a structure to your configuration called "elasticsearch"
 
 The field _path_ is equal to "/" if you directly connect to ES. 
 But when ES is on behind the proxy (nginx,haproxy), for example http://domain.com/elastic-proxy/, then following settings required:
+
 ```
     port: 80,
     host: "domain.com",
     path: "/elastic-proxy/",
 ```
+
 Nginx config proxy example:
+
 ```
     location /elastic-proxy/ {
         proxy_pass http://localhost:9200/;
@@ -63,7 +66,7 @@ The field _indexPrefix_ is used as the prefix for your dynamic indices: for exam
 
 The field _indexTimestamp_ allows you to determine the timestamping for your dynamic index. "year", "month" and "day" would produce "statsd-2014", "statsd-2014.02", "statsd-2014.02.04" respectively.
 
-The type configuration options allow you to specify different elasticsearch \_types for each statsd measurement.
+NOTE: You can also set the configuratons using environment variables, eg. `ES_HOST`, `ES_PATH`, `ES_PORT`, `ES_INDEX_TIMESTAMP`, `ES_TIME_DATATYPE`
 
 ## Template Mapping (basically required)
 
