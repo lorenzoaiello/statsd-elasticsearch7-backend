@@ -16,7 +16,7 @@
   ],
   "name": "statsd-elasticsearch7-backend",
   "description": "A StatsD backend for Elasticsearch 7.x",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "homepage": "https://github.com/lorenzoaiello/statsd-elasticsearch-backend",
   "repository": {
     "type": "git",
